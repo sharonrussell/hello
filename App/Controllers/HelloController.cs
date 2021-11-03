@@ -9,9 +9,14 @@ namespace App.Controllers
     {
         [HttpGet]
         [Authorize]
-        public string Get(string name)
+        public IActionResult Get(string name)
         {
-            return $"Hello, {name}";
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Name should be supplied");
+            }
+
+            return Ok($"Hello, {name}");
         }
     }
 }
