@@ -18,8 +18,6 @@ namespace App
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string domain = $"https://{Configuration["Auth0:domain"]}/";
-
             services
                 .AddAuthentication(options =>
                 {
@@ -28,7 +26,7 @@ namespace App
                 })
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = domain;
+                    options.Authority = Configuration["Auth0:Domain"];
                     options.Audience = Configuration["Auth0:Audience"];
                 });
 
